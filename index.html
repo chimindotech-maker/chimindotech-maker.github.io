@@ -1,0 +1,100 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chimindo IA — Herramientas prácticas para tu micro-negocio</title>
+<meta name="description" content="Guías y plantillas con IA para micro-negocios de habla hispana. Descarga inmediata, pago único, garantía de 7 días.">
+<!--
+  Landing de identidad — Chimindo IA (v1, 2026-10-25)
+  Publicación: GitHub Pages gratis (repo chimindo-ia.github.io).
+  TODO DUEÑO (2 cosas):
+    1. Pegar el QR real de Binance Pay como pages/qr-binance.png
+       (mientras falte, la sección QR muestra un aviso, no un botón roto).
+    2. Poner el correo de soporte en el footer (buscar TODO DUEÑO).
+-->
+<style>
+/* Tokens PRMX (iguales a venta/landing.html) */
+:root{--bg:#0F1115;--surface:#171A21;--hover:#1F242E;--brand:#6C5CE7;
+--brand-hover:#7D6EF0;--texto:#E6E8EE;--muted:#8B93A7;--ok:#2ECC71;
+--danger:#E74C3C;--borde:#2A2F3A}
+*{box-sizing:border-box}
+body{font-family:'Segoe UI',sans-serif;max-width:720px;margin:2rem auto;
+padding:0 1rem;line-height:1.6;background:var(--bg);color:var(--texto)}
+h1{font-size:1.5rem;margin:.2rem 0} /* jerarquía H1 = 24px */
+h2{font-size:1.25rem;margin:.2rem 0} /* H2 = 20px */
+.caja{background:var(--surface);border:1px solid var(--borde);
+border-radius:8px;padding:1.5rem;margin:1rem 0} /* tarjeta radio 8 */
+.precio{font-size:1.5rem;color:var(--ok);font-weight:700}
+.btn{display:inline-block;background:var(--brand);color:#fff;padding:.8rem 1.6rem;
+border-radius:4px;text-decoration:none;font-weight:600;margin:.25rem .5rem .25rem 0;
+border:1px solid transparent;cursor:pointer;font-size:1rem}
+.btn:hover{background:var(--brand-hover)}
+.btn.sec{background:transparent;color:var(--texto);border:1px solid var(--borde)}
+.btn.sec:hover{background:var(--hover)}
+.mini{color:var(--muted);font-size:.75rem} /* caption = 12px */
+ul{padding-left:1.2rem}
+li{margin:.3rem 0}
+#seccion-qr img{max-width:240px;width:100%;border-radius:8px;background:#fff;padding:.5rem}
+.aviso-qr{color:var(--muted);border:1px dashed var(--borde);border-radius:8px;padding:1rem}
+@media (prefers-reduced-motion:no-preference){.btn{transition:background .15s ease}}
+</style></head><body>
+<h1>Chimindo IA</h1>
+<p>Herramientas prácticas con IA para micro-negocios de habla hispana.
+Pago único, descarga inmediata, sin suscripciones.</p>
+
+<div class="caja">
+  <h2>Automatiza tu PyME con IA (sin saber programar)</h2>
+  <p>Ebook en español (incluye versión en inglés) con 6 capítulos prácticos:
+  qué automatizar primero, herramientas gratuitas, agentes de IA aplicados al
+  negocio, casos reales y plantillas listas para copiar. Incluye lector HTML
+  para leer sin internet.</p>
+  <p class="precio">$9.00 USD</p>
+  <p class="mini">Pago único · Descarga inmediata · Actualizaciones de por vida · Garantía de 7 días</p>
+</div>
+
+<div class="caja">
+  <h2>Comprar</h2>
+  <button class="btn" id="btn-qr" type="button">Pagar con QR (Binance Pay · 0% comisión)</button>
+  <a class="btn sec" href="https://www.mercadopago.com.mx/checkout/v1/redirect?pref_id=286711022-2c59c4f2-a691-4d33-b08a-79d7ad6b70a9" id="btn-mercadopago">Pagar con MercadoPago</a>
+  <a class="btn sec" href="https://payhip.com/b/vITrN" id="btn-payhip">Pagar con tarjeta / PayPal</a>
+  <div id="seccion-qr" hidden>
+    <img src="qr-binance.png" alt="QR de pago Binance Pay" id="img-qr">
+    <p class="mini">Escanéalo con la app de Binance Pay. Después del pago,
+    envía el comprobante y recibes el enlace de descarga en tu correo.</p>
+  </div>
+  <div class="aviso-qr" id="aviso-sin-qr" hidden>
+    <p class="mini">Pago con QR Binance Pay: configuración pendiente.
+    Usa MercadoPago o tarjeta mientras tanto.</p>
+  </div>
+  <p class="mini" id="nota-pago">Al completar el pago recibes el enlace de descarga en tu correo.</p>
+</div>
+
+<div class="caja">
+  <h2>Próximamente</h2>
+  <p>Kit de plantillas Excel/Sheets para llevar ventas, gastos e inventario
+  de un micro-negocio. En preparación — esta sección se actualizará cuando
+  esté disponible.</p>
+</div>
+
+<div class="caja">
+  <h2>Garantía</h2>
+  <p class="mini">Si el material no te sirve, escribe dentro de los 7 días
+  y devolvemos el 100% del pago.</p>
+</div>
+
+<p class="mini">© 2026 Chimindo IA · Soporte: TODO DUEÑO (correo de contacto)</p>
+
+<script>
+// Sin botones fantasma: si el QR no está configurado, la sección QR
+// muestra el aviso (no una imagen rota) y se desactiva el botón QR.
+document.addEventListener('DOMContentLoaded',function(){
+  var btn=document.getElementById('btn-qr'),secc=document.getElementById('seccion-qr'),
+      img=document.getElementById('img-qr'),aviso=document.getElementById('aviso-sin-qr');
+  var qrDisponible=false;
+  img.addEventListener('load',function(){qrDisponible=true;});
+  img.addEventListener('error',function(){img.hidden=true;});
+  btn.addEventListener('click',function(){
+    secc.hidden=false;
+    aviso.hidden=qrDisponible;
+  });
+});
+</script>
+</body></html>

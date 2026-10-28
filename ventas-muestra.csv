@@ -1,0 +1,6 @@
+Fecha,Venta,Producto,Cantidad,Precio Unitario,Total,Ganancia,Categoria,Notas
+2026-10-28,1,Asesoría micro-negocio,1,50.00,50.00,40.00,Servicios,"Primer cliente"
+2026-10-28,2,Plantilla Excel,1,19.00,19.00,19.00,Productos digitales,"Venta web"
+2026-10-29,3,Consultoría IA,2,75.00,150.00,120.00,Servicios,"PyME local"
+2026-10-29,4,Ebook PyME,1,9.00,9.00,9.00,Productos digitales,"Descarga inmediata"
+2026-10-30,5,Asesoría micro-negocio,1,50.00,50.00,40.00,Servicios,"Seguimiento"

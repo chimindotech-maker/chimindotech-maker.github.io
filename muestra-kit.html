@@ -1,0 +1,115 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Muestra gratuita — Kit de Gestión para Micro-Negocio | Chimindo IA</title>
+<style>
+:root{--bg:#0F1115;--surface:#171A21;--hover:#1F242E;--brand:#6C5CE7;--brand-hover:#7D6EF0;--texto:#E6E8EE;--muted:#8B93A7;--ok:#2ECC71;--borde:#2A2F3A}
+*{box-sizing:border-box}
+body{font-family:'Segoe UI',sans-serif;max-width:720px;margin:2rem auto;padding:0 1rem;line-height:1.6;background:var(--bg);color:var(--texto)}
+h1{font-size:1.5rem;margin:.2rem 0}
+h2{font-size:1.25rem;margin:.2rem 0}
+.caja{background:var(--surface);border:1px solid var(--borde);border-radius:8px;padding:1.5rem;margin:1rem 0}
+.precio{font-size:1.5rem;color:var(--ok);font-weight:700}
+.btn{display:inline-block;background:var(--brand);color:#fff;padding:.8rem 1.6rem;border-radius:4px;text-decoration:none;font-weight:600;margin:.25rem .5rem .25rem 0;border:1px solid transparent;cursor:pointer;font-size:1rem}
+.btn:hover{background:var(--brand-hover)}
+.btn.sec{background:transparent;color:var(--texto);border:1px solid var(--borde)}
+.btn.sec:hover{background:var(--hover)}
+.mini{color:var(--muted);font-size:.75rem}
+ul{padding-left:1.2rem}
+li{margin:.3rem 0}
+label{display:block;margin:.5rem 0 .2rem 0;font-weight:600}
+input[type=email],input[type=tel]{width:100%;padding:.5rem;border-radius:4px;border:1px solid var(--borde);background:var(--bg);color:var(--texto);font-size:1rem}
+.consent{display:flex;align-items:center;gap:.5rem;margin:1rem 0}
+.consent input{width:auto}
+#mensaje{margin:1rem 0;padding:.8rem;border-radius:4px;display:none}
+#mensaje.ok{background:#1b5e20;color:#fff;border:1px solid #2ECC71}
+#mensaje.err{background:#3b1b1b;color:#ffcccc;border:1px solid #E74C3C}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media (max-width:600px){.grid{grid-template-columns:1fr}}
+</style></head><body>
+
+<h1>Chimindo IA</h1>
+<p>Herramientas prácticas con IA para micro-negocios de habla hispana.</p>
+
+<div class="caja">
+  <h2>📊 Muestra gratuita — Kit de Gestión para Micro-Negocio</h2>
+  <p>Prueba una plantilla de ventas lista para usar. Descarga inmediata, sin registro complejo. Solo pedimos tu correo para enviarte la muestra y, si quieres, novedades de Chimindo IA.</p>
+  <p class="mini">Valor de la muestra: parte del kit completo ($19 USD). Esta versión incluye la plantilla de ventas con ejemplos.</p>
+</div>
+
+<div class="caja">
+  <h2>Solicitar muestra gratuita</h2>
+  <form id="form-muestra" onsubmit="return enviarMuestra(event)">
+    <div class="grid">
+      <div>
+        <label>Correo electrónico <span class="mini">(requerido)</span></label>
+        <input type="email" id="correo" placeholder="tu@correo.com" required>
+      </div>
+      <div>
+        <label>WhatsApp <span class="mini">(opcional, con código de país)</span></label>
+        <input type="tel" id="whatsapp" placeholder="+52 1 555 123 4567">
+      </div>
+    </div>
+    <div class="consent">
+      <input type="checkbox" id="consentimiento" required>
+      <label for="consentimiento">Sí, acepto recibir información de Chimindo IA y doy mi consentimiento para usar mis datos de contacto.</label>
+    </div>
+    <button class="btn" type="submit">Descargar muestra gratuita</button>
+  </form>
+  <div id="mensaje" class="ok"></div>
+</div>
+
+<div class="caja">
+  <h2>¿Qué recibes?</h2>
+  <ul>
+    <li><strong>ventas-muestra.csv</strong> — plantilla de ventas con 5 filas de ejemplo (abre en Excel, Google Sheets o LibreOffice)</li>
+    <li><strong>Guía de inicio en 5 minutos</strong> — cómo usar la plantilla paso a paso</li>
+  </ul>
+  <p class="mini">Después de enviar el formulario, recibirás los archivos por correo y podrás descargarlos inmediatamente abajo.</p>
+</div>
+
+<div class="caja" id="seccion-descarga" hidden>
+  <h2>Descarga tu muestra</h2>
+  <a class="btn" href="ventas-muestra.csv" download>Descargar ventas-muestra.csv</a>
+  <a class="btn sec" href="guia-muestra.md" download>Descargar guía de inicio</a>
+  <p class="mini">Si no recibes el correo en pocos minutos, escribe a chimindo.tech@gmail.com.</p>
+</div>
+
+<div class="caja">
+  <h2>¿Quieres el kit completo?</h2>
+  <p>El kit completo tiene 5 plantillas (ventas, gastos, flujo de caja, cobranzas, inventario) por <span class="precio">$19.00 USD</span>.</p>
+  <a class="btn sec" href="index.html">Ver kit completo y comprar</a>
+  <p class="mini">Pago con QR de Binance Pay (0% comisión), MercadoPago o tarjeta/PayPal vía Payhip.</p>
+</div>
+
+<p class="mini">© 2026 Chimindo IA · Soporte: <a href="mailto:chimindo.tech@gmail.com" style="color:var(--brand-hover)">chimindo.tech@gmail.com</a></p>
+
+<script>
+function enviarMuestra(e){
+  e.preventDefault();
+  var correo=document.getElementById('correo').value;
+  var whatsapp=document.getElementById('whatsapp').value;
+  var consentido=document.getElementById('consentimiento').checked;
+  var msg=document.getElementById('mensaje');
+  var descarga=document.getElementById('seccion-descarga');
+  if(!consentido){ msg.className='err'; msg.textContent='Debes aceptar el consentimiento para recibir la muestra.'; msg.hidden=false; return false; }
+  // Simulación de envío: en entorno $0 sin backend, abrimos el cliente de correo con los datos ya preparados
+  var asunto=encodeURIComponent('Solicitud de muestra gratuita — Kit de Gestión');
+  var cuerpo=encodeURIComponent(
+    'Hola Chimindo IA,\n\nQuiero solicitar la muestra gratuita del Kit de Gestión para Micro-Negocio.\n\n'+
+    'Correo: '+correo+'\n'+
+    'WhatsApp: '+(whatsapp||'no indicado')+'\n'+
+    'Consentimiento: sí (acepto recibir información de Chimindo IA).\n\n'+
+    'Por favor envíame la muestra (ventas-muestra.csv + guía de inicio).\n\n'+
+    'Gracias.'
+  );
+  msg.className='ok';
+  msg.textContent='Formulario listo. Se abrirá tu cliente de correo para enviarnos la solicitud y recibir la muestra.';
+  msg.hidden=false;
+  descarga.hidden=false;
+  // Abrir cliente de correo predeterminado con datos pre-llenados
+  setTimeout(function(){ location.href='mailto:chimindo.tech@gmail.com?subject='+asunto+'&body='+cuerpo; }, 800);
+  return false;
+}
+</script>
+
+</body></html>

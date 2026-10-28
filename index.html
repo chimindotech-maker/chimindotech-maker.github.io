@@ -94,6 +94,7 @@ Pago único, descarga inmediata, sin suscripciones.</p>
 </div>
 
 <p class="mini">© 2026 Chimindo IA · Soporte: <a href="mailto:chimindo.tech@gmail.com" style="color:var(--brand-hover)">chimindo.tech@gmail.com</a></p>
+<p class="mini" id="linea-visitas" hidden></p>
 
 <script>
 // Sin botones fantasma: si el QR no está configurado, la sección QR
@@ -108,6 +109,45 @@ document.addEventListener('DOMContentLoaded',function(){
     secc.hidden=false;
     aviso.hidden=qrDisponible;
   });
+});
+</script>
+<script>
+// Contador gratuito de visitas (Abacus) — ficha Protocolo R:
+// promocion/normas/contador_visitas.md (leida ANTES de instalar, D013 §9).
+// Sin cookies, sin datos personales: cuenta CARGAS de pagina (no usuarios unicos).
+// Atribucion por canal: las piezas enlazan index.html?canal=<id_canal> (ver
+// promocion/PLAN.md). El JS falla en silencio: si Abacus no responde,
+// la landing se ve igual (ficha, riesgos).
+document.addEventListener('DOMContentLoaded',function(){
+  try{
+    var NS='chimindotech-maker.github.io';
+    var BASE='https://abacus.jasoncameron.dev';
+    var canal=new URLSearchParams(location.search).get('canal');
+    if(!canal){ try{canal=sessionStorage.getItem('canal-origen');}catch(e){} }
+    if(canal){
+      canal=String(canal).toLowerCase().replace(/[^a-z0-9_\-]/g,'').slice(0,32);
+      if(canal.length>=2){ try{sessionStorage.setItem('canal-origen',canal);}catch(e){} }
+      else{ canal=null; }
+    }
+    // hits: 1 por carga de pagina (total) + 1 al contador del canal de origen
+    new Image().src=BASE+'/hit/'+NS+'/landing-total';
+    if(canal){ new Image().src=BASE+'/hit/'+NS+'/canal-'+canal; }
+    // linea discreta con el total (GET sin incrementar; CORS oficial del servicio)
+    var linea=document.getElementById('linea-visitas');
+    if(linea){
+      var xhr=new XMLHttpRequest();
+      xhr.open('GET',BASE+'/get/'+NS+'/landing-total');
+      xhr.responseType='json'; xhr.timeout=4000;
+      xhr.onload=function(){
+        if(xhr.response && typeof xhr.response.value==='number'){
+          linea.textContent='Visitas registradas (cargas de página): '+xhr.response.value;
+          linea.hidden=false;
+        }
+      };
+      xhr.onerror=function(){};
+      xhr.send();
+    }
+  }catch(e){}
 });
 </script>
 </body></html>

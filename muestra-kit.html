@@ -93,7 +93,7 @@ function enviarMuestra(e){
   var descarga=document.getElementById('seccion-descarga');
   if(!consentido){ msg.className='err'; msg.textContent='Debes aceptar el consentimiento para recibir la muestra.'; msg.hidden=false; return false; }
   // Simulación de envío: en entorno $0 sin backend, abrimos el cliente de correo con los datos ya preparados
-  var asunto=encodeURIComponent('Solicitud de muestra gratuita — Kit de Gestión');
+  var asunto=encodeURIComponent('SOLICITUD MUESTRA GRATUITA - Kit de Gestion');
   var cuerpo=encodeURIComponent(
     'Hola Chimindo IA,\n\nQuiero solicitar la muestra gratuita del Kit de Gestión para Micro-Negocio.\n\n'+
     'Correo: '+correo+'\n'+

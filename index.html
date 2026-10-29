@@ -101,6 +101,36 @@ Pago único, descarga inmediata, sin suscripciones.</p>
   y devolvemos el 100% del pago.</p>
 </div>
 
+<div class="caja">
+  <h2>📧 Recibe herramientas gratis para tu negocio</h2>
+  <p>Suscríbete para recibir la plantilla de ventas gratuita, guías prácticas
+  y novedades de Chimindo IA. Sin spam, solo valor.</p>
+  <form id="form-captura" onsubmit="return capturarCorreo(event)">
+    <div class="grid">
+      <div>
+        <label>Correo electrónico <span class="mini">(requerido)</span></label>
+        <input type="email" id="correo-captura" placeholder="tu@correo.com" required>
+      </div>
+      <div>
+        <label>WhatsApp <span class="mini">(opcional, con código de país)</span></label>
+        <input type="tel" id="whatsapp-captura" placeholder="+52 1 555 123 4567">
+      </div>
+    </div>
+    <button class="btn" type="submit">Suscribirme y recibir muestra gratis</button>
+  </form>
+  <div id="mensaje-captura" class="ok" hidden></div>
+</div>
+
+<div class="caja">
+  <h2>¿Quieres el kit completo?</h2>
+  <p>El kit completo tiene 5 plantillas (ventas, gastos, flujo de caja,
+  cobranzas, inventario) por <span class="precio">$19.00 USD</span>.</p>
+  <a class="btn" href="muestra-kit.html">Solicitar muestra gratuita → kit completo</a>
+  <p class="mini">Pago con QR de Binance Pay (0% comisión), MercadoPago o tarjeta/PayPal vía Payhip.</p>
+  <p class="mini">Al completar el pago recibes el kit (ZIP con las 5 plantillas
+  + guía) en tu correo.</p>
+</div>
+
 <p class="mini">© 2026 Chimindo IA · Soporte: <a href="mailto:chimindo.tech@gmail.com" style="color:var(--brand-hover)">chimindo.tech@gmail.com</a></p>
 <p class="mini" id="linea-visitas" hidden></p>
 
@@ -156,6 +186,33 @@ document.addEventListener('DOMContentLoaded',function(){
       xhr.send();
     }
   }catch(e){}
+});
+</script>
+
+<script>
+// Formulario de captura de correo en la landing (envia mailto pre-llenado)
+function capturarCorreo(e){
+  e.preventDefault();
+  var correo=document.getElementById('correo-captura').value;
+  var whatsapp=document.getElementById('whatsapp-captura').value;
+  var msg=document.getElementById('mensaje-captura');
+  var asunto=encodeURIComponent('SUSCRIPCION - Herramientas gratis para micro-negocio');
+  var cuerpo=encodeURIComponent(
+    'Hola Chimindo IA,\n\nQuiero suscribirme para recibir herramientas gratis y novedades de Chimindo IA.\n\n'+
+    'Correo: '+correo+'\n'+
+    'WhatsApp: '+(whatsapp||'no indicado')+'\n'+
+    'Por favor envíame la muestra gratuita del Kit de Gestion y manténme informado.\n\n'+
+    'Gracias.'
+  );
+  msg.className='ok';
+  msg.textContent='Suscripción lista. Se abrirá tu cliente de correo para confirmar y recibir la muestra gratuita.';
+  msg.hidden=false;
+  setTimeout(function(){ location.href='mailto:chimindo.tech@gmail.com?subject='+asunto+'&body='+cuerpo; }, 800);
+  return false;
+}
+document.addEventListener('DOMContentLoaded',function(){
+  var form=document.getElementById('form-captura');
+  if(form){ form.onsubmit=capturarCorreo; }
 });
 </script>
 </body></html>
